@@ -1,6 +1,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+html, body{
+    height: 100%;
+}
+
+body{
+    overflow-y: hidden
+}
+
+header.navigation{
+    margin-bottom: -20px;
+}
+
 .form-center{
     max-width: 400px;
     margin: 0 auto;
