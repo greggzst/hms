@@ -1,6 +1,11 @@
 ActiveAdmin.register Room do
   permit_params :name, :description, :capacity, :price, :room_amount
 
+  filter :name
+  filter :capacity
+  filter :price
+  filter :room_amount
+
   index do
     column :name
     column :description do |r|
