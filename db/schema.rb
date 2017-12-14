@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214144707) do
+ActiveRecord::Schema.define(version: 20171214154133) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "username", default: "", null: false
@@ -19,6 +19,54 @@ ActiveRecord::Schema.define(version: 20171214144707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_admin_users_on_username", unique: true
+  end
+
+  create_table "reservation_rooms", force: :cascade do |t|
+    t.integer "reservation_id"
+    t.integer "room_id"
+    t.integer "amount_reserved", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reservation_id"], name: "index_reservation_rooms_on_reservation_id"
+    t.index ["room_id"], name: "index_reservation_rooms_on_room_id"
+  end
+
+  create_table "reservation_services", force: :cascade do |t|
+    t.integer "reservation_id"
+    t.integer "service_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reservation_id"], name: "index_reservation_services_on_reservation_id"
+    t.index ["service_id"], name: "index_reservation_services_on_service_id"
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean "is_cancelled", default: false
+    t.integer "guests", default: 0
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.integer "capacity", default: 0
+    t.float "price", default: 0.0
+    t.integer "room_amount", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.float "price", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "availability", default: 0
   end
 
   create_table "users", force: :cascade do |t|
