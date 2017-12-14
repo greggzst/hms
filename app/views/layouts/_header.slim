@@ -1,0 +1,19 @@
+header
+  nav.navbar.navbar-default role="navigation"
+    .container-fluid
+      .navbar-header
+        button.navbar-toggle data-target="#main-navbar" data-toggle="collapse" type="button"
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        = link_to 'HMS', root_path, class: 'navbar-brand'
+      #main-navbar.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li
+          li
+        ul.nav.navbar-nav.navbar-right
+          - if user_signed_in?
+            li = link_to 'Logout', destroy_user_session_path, method: :delete
+          - else
+            li= link_to 'Login', new_user_session_path
