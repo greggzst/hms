@@ -3,4 +3,10 @@ class User < ApplicationRecord
          :rememberable, :validatable
 
   has_many :reservations
+
+  protected
+    def password_required?
+      return false unless has_account
+      super
+    end
 end
