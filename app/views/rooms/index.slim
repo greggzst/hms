@@ -3,11 +3,14 @@
     html: { class: 'form-inline' },
     defaults: { wrapper_html: { class: 'mx-2' } }) do |f|
   .input-group.string.optional.mx-2
-    = f.input_field :start_date, class: 'form-control'
+    = f.input_field :start_date, class: 'form-control', id: 'start-date'
     span.input-group-addon
       i.material-icons date_range
   .input-group.string.optional.mx-2
-    = f.input_field :end_date, class: 'form-control'
+    = f.input_field :end_date, class: 'form-control', id: 'end-date'
     span.input-group-addon
       i.material-icons date_range
   = f.input :number_of_guests
+
+javascript:
+  Form.init()
