@@ -7,7 +7,9 @@ ActiveAdmin.register Service do
 
   index do
     column :name
-    column :price
+    column :price do |s|
+      number_to_currency(s.price)
+    end
     column :availability
     actions
   end
@@ -15,7 +17,9 @@ ActiveAdmin.register Service do
   show do
     attributes_table do
       row :name
-      row :price
+      row :price do |s|
+        number_to_currency(s.price)
+      end
       row :availability
     end
   end
@@ -26,6 +30,7 @@ ActiveAdmin.register Service do
       f.input :price
       f.input :availability, as: :select, collection: Service.availabilities.map{|k,v| [k, v]}
     end
+    f.actions
   end
 
 

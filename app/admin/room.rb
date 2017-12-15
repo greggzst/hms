@@ -12,8 +12,11 @@ ActiveAdmin.register Room do
       truncate(r.description, length: 120)
     end
     column :capacity
-    column :price
+    column :price do |r|
+      number_to_currency(r.price)
+    end
     column :room_amount
+    actions
   end
 
   show do
@@ -21,7 +24,9 @@ ActiveAdmin.register Room do
       row :name
       row :description
       row :capacity
-      row :price
+      row :price do |r|
+        number_to_currency(r.price)
+      end
       row :room_amount
     end
   end
@@ -34,6 +39,7 @@ ActiveAdmin.register Room do
       f.input :price
       f.input :room_amount
     end
+    f.actions
   end
 
 
