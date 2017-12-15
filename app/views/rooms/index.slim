@@ -1,16 +1,23 @@
-= simple_form_for(@rooms_filter_form,
-    url: filter_rooms_path,
-    html: { class: 'form-inline' },
-    defaults: { wrapper_html: { class: 'mx-2' } }) do |f|
-  .input-group.string.optional.mx-2
-    = f.input_field :start_date, class: 'form-control', id: 'start-date'
-    span.input-group-addon
-      i.material-icons date_range
-  .input-group.string.optional.mx-2
-    = f.input_field :end_date, class: 'form-control', id: 'end-date'
-    span.input-group-addon
-      i.material-icons date_range
-  = f.input :number_of_guests
+.container
+  .row.filter-form-container
+    = simple_form_for(@rooms_filter_form,
+        url: filter_rooms_path,
+        html: { class: 'form-inline' },
+        defaults: { wrapper_html: { class: 'mx-2' } }) do |f|
+      .input-group.string.optional.mx-2
+        = f.input_field :start_date, class: 'form-control', id: 'start-date'
+        span.input-group-addon
+          i.material-icons date_range
+      .input-group.string.optional.mx-2
+        = f.input_field :end_date, class: 'form-control', id: 'end-date'
+        span.input-group-addon
+          i.material-icons date_range
+      = f.input :number_of_guests
+
+  - if @rooms.any?
+    - @rooms.each do |room|
+      = render 'rooms/room/room', room: room
+  - else
 
 javascript:
   Form.init()
