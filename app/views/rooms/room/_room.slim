@@ -7,4 +7,6 @@
     .capacity = room.capacity
     .price = number_to_currency(room.price)
     .action
-      = link_to 'Book', '#', class: 'btn btn-primary'
+      button.btn.btn-primary.book-button data-room-id==room.id data-url==pre_book_rooms_path
+        span.button-content Book
+      / pass room_id and amount_reserved - 1 by default

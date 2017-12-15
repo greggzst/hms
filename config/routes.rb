@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   resources :rooms, only: [:index] do
     get :filter, on: :collection
+    post :pre_book, on: :collection
+    post :book, on: :collection
   end
 end

@@ -12,7 +12,7 @@
         = f.input_field :end_date, class: 'form-control', id: 'end-date'
         span.input-group-addon
           i.material-icons date_range
-      = f.input :number_of_guests
+      = f.input :number_of_guests, input_html: { id: 'number-of-guests' }
 
   - if @rooms.any?
     .rooms

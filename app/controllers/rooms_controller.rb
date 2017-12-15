@@ -7,4 +7,32 @@ class RoomsController < ApplicationController
   def filter
 
   end
+
+  def pre_book
+    @reservation = Reservation.new(reservation_params)
+  end
+
+  def book
+    @reservation.user = @user
+    if @reservation.save
+    else
+    end
+  end
+
+  private
+
+    def reservation_params
+      params.require(:reservation).permit(
+        :start_date,
+        :end_date,
+        :guests,
+        reservation_rooms_attributes: [:room_id, :amount_reserved]
+      )
+    end
+
+    def set_user
+      @user = User.find_or_create_by(email: params[:email]) do |user|
+        user.attributes = params[:user_attributes]
+      end
+    end
 end
