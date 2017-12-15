@@ -13,5 +13,6 @@
  *= require main
  *= require home
  *= require jquery-ui
+ *= require rooms
  *= require_self
  */

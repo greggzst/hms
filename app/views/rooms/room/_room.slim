@@ -1,4 +1,4 @@
-.row
+.row.room
   .col-md-6
     span Photo
   .col-md-6
@@ -6,3 +6,5 @@
     .description = room.description
     .capacity = room.capacity
     .price = number_to_currency(room.price)
+    .action
+      = link_to 'Book', '#', class: 'btn btn-primary'
