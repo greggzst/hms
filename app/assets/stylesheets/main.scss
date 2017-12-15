@@ -1,4 +1,3 @@
-@import "bootstrap-sprockets";
 @import "bootstrap";
 
 html, body{
@@ -7,10 +6,6 @@ html, body{
 
 body{
     overflow-y: hidden
-}
-
-header.navigation{
-    margin-bottom: -20px;
 }
 
 .form-center{

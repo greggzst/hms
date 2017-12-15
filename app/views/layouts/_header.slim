@@ -1,19 +1,12 @@
-header.navigation
-  nav.navbar.navbar-inverse.navbar-static-top role="navigation"
-    .container-fluid
-      .navbar-header
-        button.navbar-toggle data-target="#main-navbar" data-toggle="collapse" type="button"
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        = link_to 'HMS', root_path, class: 'navbar-brand'
-      #main-navbar.collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li
-          li
-        ul.nav.navbar-nav.navbar-right
-          - if user_signed_in?
-            li = link_to 'Logout', destroy_user_session_path, method: :delete
-          - else
-            li= link_to 'Login', new_user_session_path
+header
+  nav.navbar.navbar-expand-md.bg-dark.navbar-dark
+    = link_to 'HMS', root_path, class: 'navbar-brand'
+    button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.navbar-right.ml-auto
+        - if user_signed_in?
+          li.nav-item = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link'
+        - else
+          li.nav-item = link_to 'Login', new_user_session_path, class: 'nav-link'
+
