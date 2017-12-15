@@ -1,0 +1,13 @@
+= simple_form_for(@rooms_filter_form,
+    url: filter_rooms_path,
+    html: { class: 'form-inline' },
+    defaults: { wrapper_html: { class: 'mx-2' } }) do |f|
+  .input-group.string.optional.mx-2
+    = f.input_field :start_date, class: 'form-control'
+    span.input-group-addon
+      i.material-icons date_range
+  .input-group.string.optional.mx-2
+    = f.input_field :end_date, class: 'form-control'
+    span.input-group-addon
+      i.material-icons date_range
+  = f.input :number_of_guests

@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   root 'home#index'
+
+  resources :rooms, only: [:index] do
+    get :filter, on: :collection
+  end
 end
