@@ -10,5 +10,13 @@
       = rs.hidden_field :service_id
       = rs.hidden_field :amount
 
-  #user-form
-    = render 'reservations/user_form'
+    = f.simple_fields_for :user do |user|
+      = user.input :email
+      = user.input :has_account, label: 'Create Account'
+      = user.input :firstname, wrapper_html: {class: 'hidden' }
+      = user.input :lastname, wrapper_html: {class: 'hidden' }
+      = user.input :valid_document_number, wrapper_html: {class: 'hidden' }
+      = user.input :password, wrapper_html: {class: 'hidden' }
+      = user.input :password_confirmation, wrapper_html: {class: 'hidden' }
+
+    = f.submit 'Book', class: 'btn btn-primary'

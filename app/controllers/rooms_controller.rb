@@ -15,15 +15,28 @@ class RoomsController < ApplicationController
       render partial: 'reservations/form' and return
     elsif params[:add_service].present? && params[:add_service] == 'true'
       @reservation = Reservation.new(reservation_params)
-      @user = User.new
+      @reservation.build_user
       render partial: 'reservations/book_form' and return
     end
   end
 
   def book
-    @reservation.user = @user
-    if @reservation.save
+    @reservation = Reservation.new(reservation_params)
+    @user = User.find_or_initialize_by(email: user_params[:email]) do |user|
+      user.attributes = user_params
+    end
+
+    if @user.new_record?
+      if @user.save
+        @reservation.user = @user
+        @reservation.save
+      else
+        @reservation.build_user unless @reservation.user.present?
+        render partial: 'reservations/book_form', status: :not_acceptable
+      end
     else
+      @reservation.user = @user
+      @reservation.save
     end
   end
 
@@ -36,6 +49,18 @@ class RoomsController < ApplicationController
         :guests,
         reservation_rooms_attributes: [:id, :room_id, :amount_reserved],
         reservation_services_attributes: [:id, :service_id, :amount]
+      )
+    end
+
+    def user_params
+      params.require(:reservation).require(:user_attributes).permit(
+        :email,
+        :has_account,
+        :firstname,
+        :lastname,
+        :valid_document_number,
+        :password,
+        :password_confirmation
       )
     end
 end

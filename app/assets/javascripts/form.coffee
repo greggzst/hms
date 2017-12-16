@@ -56,5 +56,31 @@ init = ->
     #prevents form from submission
     false
 
+  $('body').on 'change', '#reservation-step-3 #reservation_user_attributes_has_account', ->
+    $form = $(@).closest 'form'
+    if $(@).is(':checked')
+      $hiddenFields = $form.find '.hidden'
+      $hiddenFields.removeClass 'hidden'
+      $hiddenFields.addClass 'shown'
+    else
+      $shownFields = $form.find '.shown'
+      $shownFields.removeClass 'shown'
+      $shownFields.addClass 'hidden'
+
+  $('body').on 'submit', '#new_reservation', ->
+    $form = $(@)
+    formData = $form.serializeArray()
+
+    $.ajax
+      url: $form.attr('action')
+      method: $form.attr('method')
+      data: formData
+      success: (data, status, jqXHR) ->
+        console.log 'supper'
+      error:(jqXHR, status, error) ->
+        $form.replaceWith(jqXHR.responseText)
+    #prevents form from submission
+    false
+
 
 @Form = { init }

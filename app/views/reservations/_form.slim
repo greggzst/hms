@@ -1,8 +1,12 @@
 #reservation-step-2
   .reservations-details
     .date-range
-      span.date-from= @reservation.start_date.strftime('%D')
-      span.date-to= @reservation.end_date.strftime('%D')
+      span.date-from
+        b Date from:
+        = @reservation.start_date.strftime('%D')
+      span.date-to
+        b Date to:
+        = @reservation.end_date.strftime('%D')
 
     .rooms
       ul.rooms-list
