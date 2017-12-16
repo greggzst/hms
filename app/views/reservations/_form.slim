@@ -1,0 +1,29 @@
+#reservation-step-2
+  .reservations-details
+    .date-range
+      span.date-from= @reservation.start_date.strftime('%D')
+      span.date-to= @reservation.end_date.strftime('%D')
+
+    .rooms
+      ul.rooms-list
+        - @reservation.rooms.each do |room|
+          li = room.name
+    .guests-number
+      = @reservation.guests
+
+  = simple_form_for(@reservation,
+    url: pre_book_rooms_path(add_service: true),
+    remote: true,
+    html: { id: 'add_service' }) do |f|
+    = f.hidden_field :start_date
+    = f.hidden_field :end_date
+    = f.hidden_field :guests
+    = f.simple_fields_for :reservation_rooms do |rr|
+      = rr.hidden_field :room_id
+      = rr.hidden_field :amount_reserved
+    = f.simple_fields_for :reservation_services do |rs|
+      = rs.hidden_field :service_id
+      = rs.object.service.name
+      = rs.input :amount
+
+    = f.submit 'Next', class: 'btn btn-primary', id: 'sumbit-service'

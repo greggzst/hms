@@ -35,11 +35,26 @@ init = ->
       url: url
       method: 'POST'
       data: data
-      success: ->
-        console.log 'yeah'
-      error: ->
-        console.log 'nah'
+      success: (data, status, jqXHR) ->
+        $('#test').empty()
+        $('#test').append(data)
+      error: (jqXHR, status, error) ->
+
     return
+
+  $('body').on 'submit', '#add_service', ->
+    $form = $(@)
+    formData = $form.serializeArray()
+
+    $.ajax
+      url: $form.attr('action')
+      method: $form.attr('method')
+      data: formData
+      success: (data, status, jqXHR) ->
+        $('#reservation-step-2').replaceWith(data)
+      error: (jqXHR, status, error) ->
+    #prevents form from submission
+    false
 
 
 @Form = { init }

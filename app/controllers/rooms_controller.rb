@@ -9,7 +9,15 @@ class RoomsController < ApplicationController
   end
 
   def pre_book
-    @reservation = Reservation.new(reservation_params)
+    if params[:new_reservation].present? && params[:new_reservation] == 'true'
+      @reservation = Reservation.new(reservation_params)
+      Service.available.each { |s| @reservation.reservation_services.build(service: s) }
+      render partial: 'reservations/form' and return
+    elsif params[:add_service].present? && params[:add_service] == 'true'
+      @reservation = Reservation.new(reservation_params)
+      @user = User.new
+      render partial: 'reservations/book_form' and return
+    end
   end
 
   def book
@@ -26,13 +34,8 @@ class RoomsController < ApplicationController
         :start_date,
         :end_date,
         :guests,
-        reservation_rooms_attributes: [:room_id, :amount_reserved]
+        reservation_rooms_attributes: [:id, :room_id, :amount_reserved],
+        reservation_services_attributes: [:id, :service_id, :amount]
       )
-    end
-
-    def set_user
-      @user = User.find_or_create_by(email: params[:email]) do |user|
-        user.attributes = params[:user_attributes]
-      end
     end
 end
