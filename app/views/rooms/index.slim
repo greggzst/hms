@@ -2,8 +2,9 @@
   .row.filter-form-container
     = simple_form_for(@rooms_filter_form,
         url: filter_rooms_path,
-        html: { class: 'form-inline' },
-        defaults: { wrapper_html: { class: 'mx-2' } }) do |f|
+        html: { class: 'form-inline', id: 'filter-form', method: 'GET' },
+        defaults: { wrapper_html: { class: 'mx-2' } },
+        remote: true) do |f|
       .input-group.string.optional.mx-2
         = f.input_field :start_date, class: 'form-control', id: 'start-date'
         span.input-group-addon
@@ -13,12 +14,10 @@
         span.input-group-addon
           i.material-icons date_range
       = f.input :number_of_guests, input_html: { id: 'number-of-guests' }
+      = f.submit 'Check availabity', class: 'btn btn-primary'
 
-  - if @rooms.any?
-    .rooms
-      - @rooms.each do |room|
-        = render 'rooms/room/room', room: room
-  - else
+  #rooms
+    = render 'rooms/rooms'
 
   #test
 

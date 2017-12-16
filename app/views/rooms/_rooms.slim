@@ -1,0 +1,6 @@
+- if @rooms.any?
+  .rooms
+    - @rooms.each do |room|
+      = render 'rooms/room', room: room
+- else
+  p There are no rooms available for this period of time.

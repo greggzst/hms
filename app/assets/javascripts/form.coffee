@@ -16,6 +16,20 @@ init = ->
       maxDate = $(@).datepicker('getDate')
       $startDate.datepicker('option', 'maxDate', maxDate)
 
+  $('body').on 'submit', '#filter-form', ->
+    $form = $(@)
+    formData = $form.serializeArray()
+    $rooms = $('#rooms')
+
+    $.ajax
+      url: $form.attr('action')
+      method: $form.attr('method')
+      data: formData
+      success: (data, status, jqXHR) ->
+        $rooms.empty()
+        $rooms.append(data)
+    false
+
   $('body').on 'click', '.action .book-button', ->
     $button = $(@)
     roomId = $button.data 'room-id'
@@ -38,7 +52,6 @@ init = ->
       success: (data, status, jqXHR) ->
         $('#test').empty()
         $('#test').append(data)
-      error: (jqXHR, status, error) ->
 
     return
 

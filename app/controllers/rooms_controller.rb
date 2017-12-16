@@ -5,7 +5,9 @@ class RoomsController < ApplicationController
   end
 
   def filter
-
+    @rooms_filter_form = RoomsFilterForm.new(rooms_filter_form_params)
+    @rooms = @rooms_filter_form.query
+    render partial: 'rooms/rooms'
   end
 
   def pre_book
@@ -61,6 +63,14 @@ class RoomsController < ApplicationController
         :valid_document_number,
         :password,
         :password_confirmation
+      )
+    end
+
+    def rooms_filter_form_params
+      params.require(:rooms_filter_form).permit(
+        :start_date,
+        :end_date,
+        :number_of_guests
       )
     end
 end
