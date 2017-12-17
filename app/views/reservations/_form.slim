@@ -1,18 +1,21 @@
 #reservation-step-2
   .reservations-details
-    .date-range
+    b.ml-2 Your reservations details:
+    .date-range.ml-2.mb-4
       span.date-from
-        b Date from:
+        b.mr-3 Date from:
         = @reservation.start_date.strftime('%D')
-      span.date-to
-        b Date to:
+      span.date-to.ml-5
+        b.mr-3 Date to:
         = @reservation.end_date.strftime('%D')
 
-    .rooms
+    .rooms.ml-2.mb-4
+      b Rooms you're booking:
       ul.rooms-list
-        - @reservation.rooms.each do |room|
+        - @reservation.reservation_rooms.map(&:room).each do |room|
           li = room.name
-    .guests-number
+    .guests-number.ml-2
+      b.mr-3 Number of guests:
       = @reservation.guests
 
   = simple_form_for(@reservation,
@@ -30,4 +33,4 @@
       = rs.object.service.name
       = rs.input :amount
 
-    = f.submit 'Next', class: 'btn btn-primary', id: 'sumbit-service'
+    = f.submit 'Next', class: 'btn btn-primary ml-2', id: 'sumbit-service'

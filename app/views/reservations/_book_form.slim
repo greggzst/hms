@@ -1,5 +1,9 @@
+- errors ||= false
+
 #reservation-step-3
-  = simple_form_for(@reservation, url: book_rooms_path, remote: true) do |f|
+  = simple_form_for(@reservation,
+    url: book_rooms_path,
+    remote: true) do |f|
     = f.hidden_field :start_date
     = f.hidden_field :end_date
     = f.hidden_field :guests
@@ -12,11 +16,11 @@
 
     = f.simple_fields_for :user do |user|
       = user.input :email
-      = user.input :has_account, label: 'Create Account'
-      = user.input :firstname, wrapper_html: {class: 'hidden' }
-      = user.input :lastname, wrapper_html: {class: 'hidden' }
-      = user.input :valid_document_number, wrapper_html: {class: 'hidden' }
-      = user.input :password, wrapper_html: {class: 'hidden' }
-      = user.input :password_confirmation, wrapper_html: {class: 'hidden' }
+      = user.input :has_account, label: 'Create Account', input_html: { checked: "#{'checked' if errors}" }
+      = user.input :firstname, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
+      = user.input :lastname, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
+      = user.input :valid_document_number, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
+      = user.input :password, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
+      = user.input :password_confirmation, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
 
     = f.submit 'Book', class: 'btn btn-primary'

@@ -14,5 +14,6 @@
  *= require home
  *= require jquery-ui
  *= require rooms
+ *= require reservations
  *= require_self
  */
