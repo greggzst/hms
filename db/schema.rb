@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214180855) do
+ActiveRecord::Schema.define(version: 20171217130112) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "username", default: "", null: false
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 20171214180855) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_admin_users_on_username", unique: true
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "image"
+    t.boolean "is_primary"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_photos_on_room_id"
   end
 
   create_table "reservation_rooms", force: :cascade do |t|

@@ -1,5 +1,6 @@
 ActiveAdmin.register Room do
-  permit_params :name, :description, :capacity, :price, :room_amount
+  permit_params :name, :description, :capacity, :price, :room_amount,
+                photos_attributes: [:id, :image, :is_primary, :_destroy]
 
   filter :name
   filter :capacity
@@ -36,6 +37,10 @@ ActiveAdmin.register Room do
       f.input :name
       f.input :description
       f.input :capacity
+      f.has_many :photos, allow_destroy: true do |photo|
+        photo.input :image, as: :file, hint: image_tag(photo.object.image_url(:thumb))
+        photo.input :is_primary
+      end
       f.input :price
       f.input :room_amount
     end
