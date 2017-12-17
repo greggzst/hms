@@ -3,6 +3,8 @@ class Photo < ApplicationRecord
   mount_uploader :image, ImageUploader
   before_destroy :set_new_primary
 
+  validates :image, presence: true
+
   def set_primary
     self.is_primary = true
     self.save
