@@ -21,3 +21,13 @@ body{
 .nav-tabs li.disabled a {
     pointer-events: none;
 }
+
+.has-error input{
+    border: 2px solid #ff0000;
+}
+
+.has-error span.help-block{
+    font-weight: bold;
+    color: #ff0000;
+    margin-top: 4px;
+}

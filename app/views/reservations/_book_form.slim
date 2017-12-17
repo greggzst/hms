@@ -3,7 +3,8 @@
 #reservation-step-3
   = simple_form_for(@reservation,
     url: book_rooms_path,
-    remote: true) do |f|
+    remote: true,
+    defaults: { errors: true }) do |f|
     = f.hidden_field :start_date
     = f.hidden_field :end_date
     = f.hidden_field :guests

@@ -34,8 +34,8 @@ class RoomsController < ApplicationController
         @reservation.user = @user
         @reservation.save
       else
-        @reservation.build_user unless @reservation.user.present?
-        render partial: 'reservations/book_form', locals: { errors: true }, status: :not_acceptable
+        @reservation.user = @user unless @reservation.user.present?
+        render partial: 'reservations/book_form', locals: { errors: @user.errors.messages.count > 1 }, status: :not_acceptable
       end
     else
       @reservation.user = @user
