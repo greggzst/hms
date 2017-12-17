@@ -32,13 +32,15 @@ ActiveAdmin.register Room do
     end
   end
 
-  form do |f|
+  form(html: { multipart: true }) do |f|
     f.inputs do
       f.input :name
       f.input :description
       f.input :capacity
       f.has_many :photos, allow_destroy: true do |photo|
-        photo.input :image, as: :file, hint: image_tag(photo.object.image_url(:thumb))
+        photo.input :image, as: :file,
+          hint: image_tag(photo.object.image_url(:thumb), width: 64, height: 64),
+          input_html: { class: 'photo' }
         photo.input :is_primary
       end
       f.input :price
