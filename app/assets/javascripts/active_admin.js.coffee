@@ -14,16 +14,26 @@ loadImagePreview = ->
 
 initSwitch = ->
   $('.switch').click (e) ->
-    elem = $(@)
-    url = elem.data('url')
+    $elem = $(@)
+    url = $elem.data('url')
     $.ajax
       type: 'PATCH'
       url: url
       dataType: 'json'
       success: (data) ->
-        elem.text data.label
-        elem.removeClass('yes no')
-        elem.addClass(data.class)
+        if data.length > 1
+          $previousPrimary = $(".switch[data-id='#{data[0].photo_id}']")
+          $previousPrimary.text(data[0].label)
+          $previousPrimary.removeClass('yes no')
+          $previousPrimary.addClass(data[0].class)
+
+          $elem.text data[1].label
+          $elem.removeClass('yes no')
+          $elem.addClass(data[1].class)
+        else
+          $elem.text data[0].label
+          $elem.removeClass('yes no')
+          $elem.addClass(data[0].class)
 
 init = ->
   initSwitch()

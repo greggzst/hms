@@ -5,13 +5,21 @@ ActiveAdmin.register Photo do
 
   member_action :switch_primary, method: :patch do
     if request.xhr?
+      photos = []
       if resource.is_primary
         resource.unset_primary
       else
+        room_primary_photo = resource.room.primary_photo
+        if room_primary_photo
+          room_primary_photo.unset_primary
+          photos << { photo_id: room_primary_photo.id, label: 'NO', class: 'no' }
+        end
         resource.set_primary
       end
 
-      render json: { label: "#{resource.is_primary ? 'TAK' : 'NIE'}", class: "#{resource.is_primary ? 'yes' : 'no'}" }
+      photos << { label: "#{resource.is_primary ? 'YES' : 'NO'}", class: "#{resource.is_primary ? 'yes' : 'no'}" }
+
+      render json: photos
     end
   end
 

@@ -7,7 +7,11 @@ class Room < ApplicationRecord
   validates :name, :capacity, :price, :room_amount, presence: true
   accepts_nested_attributes_for :photos, allow_destroy: true
 
-  def primary_photo(version)
+  def primary_photo_url(version)
     photos.where(is_primary: true).first.image_url(version)
+  end
+
+  def primary_photo
+    photos.where(is_primary: true).first
   end
 end
