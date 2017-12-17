@@ -13,6 +13,9 @@ ActiveAdmin.register Room do
       truncate(r.description, length: 120)
     end
     column :capacity
+    column :photos do |r|
+      link_to r.photos.count, admin_photos_path("q[owner_id_eq]" => r)
+    end
     column :price do |r|
       number_to_currency(r.price)
     end
@@ -25,6 +28,10 @@ ActiveAdmin.register Room do
       row :name
       row :description
       row :capacity
+      row :photos do |room|
+        room_photos = room.photos.collect {|photo| link_to(image_tag(photo.image_url(:thumb)), admin_photo_path(photo.id))}
+        room_photos.any? ? room_photos.join.html_safe : 'EMPTY'
+      end
       row :price do |r|
         number_to_currency(r.price)
       end

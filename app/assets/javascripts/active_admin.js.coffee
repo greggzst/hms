@@ -11,5 +11,22 @@ loadImagePreview = ->
       $photoPreview.attr('src', image_base64)
     reader.readAsDataURL(file)
 
-$(document).ready ->
+initSwitch = ->
+  $('.switch').click (e) ->
+    elem = $(@)
+    url = elem.data('url')
+    $.ajax
+      type: 'PATCH'
+      url: url
+      dataType: 'json'
+      success: (data) ->
+        elem.text data.label
+        elem.removeClass('yes no')
+        elem.addClass(data.class)
+
+init = ->
+  initSwitch()
   loadImagePreview()
+
+$(document).ready ->
+  init()
