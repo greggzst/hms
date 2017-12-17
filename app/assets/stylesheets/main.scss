@@ -6,6 +6,7 @@ html, body{
 
 body{
     // overflow-y: hidden
+    overflow-x: hidden;
 }
 
 .hidden{
@@ -15,4 +16,8 @@ body{
 .form-center{
     max-width: 400px;
     margin: 0 auto;
+}
+
+.nav-tabs li.disabled a {
+    pointer-events: none;
 }

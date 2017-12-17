@@ -3,4 +3,11 @@
     .container
       h2 Welcome to our hotel!
       p Take a tour and see what we've got to offer!
-      button.btn.btn-primary Book now
+      p = "We offer #{@rooms_count} beautiful rooms"
+      button.btn.btn-primary#drawer-button data-url==rooms_path Book now
+  .home-book
+    .container#attach-filter
+
+
+javascript:
+  Home.init()

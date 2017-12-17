@@ -50,8 +50,10 @@ init = ->
       method: 'POST'
       data: data
       success: (data, status, jqXHR) ->
-        $('#test').empty()
-        $('#test').append(data)
+        $('#add-services').empty()
+        $('#add-services').append(data)
+        $('#add-services-tab').parent().removeClass 'disabled'
+        $('#add-services-tab').trigger 'click'
 
     return
 
@@ -64,7 +66,10 @@ init = ->
       method: $form.attr('method')
       data: formData
       success: (data, status, jqXHR) ->
-        $('#reservation-step-2').replaceWith(data)
+        $('#book-and-confirm').empty()
+        $('#book-and-confirm').append(data)
+        $('#book-and-confirm-tab').parent().removeClass 'disabled'
+        $('#book-and-confirm-tab').trigger 'click'
       error: (jqXHR, status, error) ->
     #prevents form from submission
     false

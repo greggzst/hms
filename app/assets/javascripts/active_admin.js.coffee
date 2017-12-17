@@ -1,6 +1,7 @@
 #= require active_admin/base
 
 loadImagePreview = ->
+  $('body').off 'change', 'form.room input.photo'
   $('body').on 'change', 'form.room input.photo', (e) ->
     $input = $(@)
     $photoPreview = $input.siblings('.inline-hints').find('img')

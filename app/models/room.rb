@@ -8,7 +8,7 @@ class Room < ApplicationRecord
   accepts_nested_attributes_for :photos,
             allow_destroy: true, reject_if: ->(photo) { photo['image'].blank? }
 
-  def primary_photo
-    photos.where(is_primary: true).first
+  def primary_photo(version)
+    photos.where(is_primary: true).first.image_url(version)
   end
 end

@@ -1,11 +1,14 @@
 .row.room
   .col-md-6
-    span Photo
+    = image_tag(room.primary_photo(:preview))
   .col-md-6
-    .name = room.name
-    .description = room.description
-    .capacity = room.capacity
-    .price = number_to_currency(room.price)
+    .room-details
+      .name = room.name
+      .description = room.description
+      .capacity
+        i.material-icons people
+        span.room-capacity= "Room capacity: #{room.capacity}"
+      .price = "Price: #{number_to_currency(room.price)}"
     .action
       button.btn.btn-primary.book-button data-room-id==room.id data-url==pre_book_rooms_path(new_reservation: true)
         span.button-content Book
