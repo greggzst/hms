@@ -19,6 +19,9 @@
         = f.input :number_of_guests, input_html: { id: 'number-of-guests' }
         = f.submit 'Check availabity', class: 'btn btn-primary'
 
+    #spinner.spinner.hidden
+      = fa_icon "circle-o-notch", class: 'fa-spin fa-4x'
+
     #rooms.rooms-container
       = render 'rooms/rooms'
   #add-services.tab-pane.fade role="tabpanel"

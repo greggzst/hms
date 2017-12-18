@@ -1,7 +1,12 @@
 class RoomsFilterForm
   include ActiveModel::Model
 
-  attr_accessor :start_date, :end_date, :number_of_guests
+  attr_accessor :start_date, :end_date
+  attr_reader :number_of_guests
+
+  def number_of_guests= value
+    @number_of_guests = value.to_i
+  end
 
   def query
     reservations_rooms = Reservation.where(
@@ -16,9 +21,9 @@ class RoomsFilterForm
       booked_rooms_ids = reservations_rooms.map do |key, value|
         key[0] if value.count == key[1].room_amount
       end.uniq.join(',')
-      Room.where('id NOT IN (?) AND capacity = ?', booked_rooms_ids, number_of_guests)
+      Room.where('id NOT IN (?) AND capacity >= ?', booked_rooms_ids, number_of_guests)
     else
-      Room.where(capacity: number_of_guests)
+      Room.where('capacity >= ?', number_of_guests)
     end
   end
 end

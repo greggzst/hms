@@ -15,5 +15,6 @@
  *= require jquery-ui
  *= require rooms
  *= require reservations
+ *= require font-awesome
  *= require_self
  */

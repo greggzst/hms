@@ -20,13 +20,16 @@ init = ->
     $form = $(@)
     formData = $form.serializeArray()
     $rooms = $('#rooms')
+    $spinner = $('#spinner')
+    $spinner.removeClass('hidden')
+    $rooms.empty()
 
     $.ajax
       url: $form.attr('action')
       method: $form.attr('method')
       data: formData
       success: (data, status, jqXHR) ->
-        $rooms.empty()
+        $spinner.addClass('hidden')
         $rooms.append(data)
     false
 

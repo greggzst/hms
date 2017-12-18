@@ -8,7 +8,7 @@
       .capacity
         i.material-icons people
         span.room-capacity= "Room capacity: #{room.capacity}"
-      .price = "Price: #{number_to_currency(room.price)}"
+      .price = "Price: #{number_to_currency(room.price * @rooms_filter_form.number_of_guests)}"
     .action
       button.btn.btn-primary.book-button data-room-id==room.id data-url==pre_book_rooms_path(new_reservation: true)
         span.button-content Book
