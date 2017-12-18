@@ -8,8 +8,9 @@
       .capacity
         i.material-icons people
         span.room-capacity= "Room capacity: #{room.capacity}"
-      .price = "Price: #{number_to_currency(room.price * @rooms_filter_form.number_of_guests)}"
+        - room_price = room.price * @rooms_filter_form.number_of_guests
+      .price = "Price: #{number_to_currency(room_price)}"
     .action
-      button.btn.btn-primary.book-button data-room-id==room.id data-url==pre_book_rooms_path(new_reservation: true)
+      button.btn.btn-primary.book-button data-room-id==room.id data-room-price==room_price data-url==pre_book_rooms_path(new_reservation: true)
         span.button-content Book
       / pass room_id and amount_reserved - 1 by default

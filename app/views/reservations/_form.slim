@@ -25,12 +25,20 @@
     = f.hidden_field :start_date
     = f.hidden_field :end_date
     = f.hidden_field :guests
+    = f.hidden_field :amount_to_pay
     = f.simple_fields_for :reservation_rooms do |rr|
       = rr.hidden_field :room_id
       = rr.hidden_field :amount_reserved
     = f.simple_fields_for :reservation_services do |rs|
       = rs.hidden_field :service_id
-      = rs.object.service.name
-      = rs.input :amount
+      .form-group.reservation_services.ml-2
+        span.service-name
+          = rs.object.service.name
+        = rs.input_field :amount, as: :string, class: 'form-control mx-2', value: 0
+        span.service-price
+          = " x #{number_to_currency(rs.object.service.price)}"
+
+    = f.input :amount_to_pay, label: 'Amount to pay: ', label_html: { class: 'mr-3' },
+              wrapper_html: { class: 'mx-2' }, input_html: { type: 'number', disabled: 'disabled' }
 
     = f.submit 'Next', class: 'btn btn-primary ml-2', id: 'sumbit-service'

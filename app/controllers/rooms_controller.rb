@@ -50,6 +50,7 @@ class RoomsController < ApplicationController
         :start_date,
         :end_date,
         :guests,
+        :amount_to_pay,
         reservation_rooms_attributes: [:id, :room_id, :amount_reserved],
         reservation_services_attributes: [:id, :service_id, :amount]
       )

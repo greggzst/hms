@@ -36,12 +36,14 @@ init = ->
   $('body').on 'click', '.action .book-button', ->
     $button = $(@)
     roomId = $button.data 'room-id'
+    roomPrice = $button.data 'room-price'
     url = $button.data 'url'
     data =
       reservation:{
         start_date: $startDate.val()
         end_date: $endDate.val()
         guests: $numberOfGuests.val()
+        amount_to_pay: roomPrice
         reservation_rooms_attributes:[
           room_id: roomId
           amount_reserved: 1

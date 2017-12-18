@@ -7,4 +7,6 @@ class Reservation < ApplicationRecord
   has_many :rooms, through: :reservation_rooms
 
   accepts_nested_attributes_for :reservation_rooms, :reservation_services, :user
+
+  attr_accessor :amount_to_pay
 end
