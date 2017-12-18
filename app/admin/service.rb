@@ -28,7 +28,7 @@ ActiveAdmin.register Service do
     f.inputs do
       f.input :name
       f.input :price
-      f.input :availability, as: :select, collection: Service.availabilities.keys
+      f.input :availability, as: :select, collection: Service.availabilities.keys, include_blank: false
     end
     f.actions
   end
