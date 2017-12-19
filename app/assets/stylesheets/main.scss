@@ -37,3 +37,7 @@ body{
     background: white;
     cursor: default;
 }
+
+button, input[type='submit']{
+    cursor: pointer;
+}

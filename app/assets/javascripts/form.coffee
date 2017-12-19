@@ -132,5 +132,10 @@ init = ->
     #prevents form from submission
     false
 
+  $('body').on 'click', '.back-button', ->
+    $tabs = $('#form-tabs')
+    $active = $tabs.find('.active').parent()
+    $active.prev().find('a').trigger 'click'
+
 
 @Form = { init }
