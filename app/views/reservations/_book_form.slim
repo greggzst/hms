@@ -9,10 +9,10 @@
     defaults: { errors: true }) do |f|
     = f.hidden_field :start_date
     = f.hidden_field :end_date
-    = f.hidden_field :guests
     = f.simple_fields_for :reservation_rooms do |rr|
       = rr.hidden_field :room_id
       = rr.hidden_field :amount_reserved
+      = rr.hidden_field :guests
     = f.simple_fields_for :reservation_services do |rs|
       = rs.hidden_field :service_id
       = rs.hidden_field :amount

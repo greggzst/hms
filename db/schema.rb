@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217130112) do
+ActiveRecord::Schema.define(version: 20171219105801) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "username", default: "", null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20171217130112) do
     t.integer "amount_reserved", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "guests", default: 0
     t.index ["reservation_id"], name: "index_reservation_rooms_on_reservation_id"
     t.index ["room_id"], name: "index_reservation_rooms_on_room_id"
   end
@@ -54,7 +55,6 @@ ActiveRecord::Schema.define(version: 20171217130112) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.boolean "is_cancelled", default: false
-    t.integer "guests", default: 0
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

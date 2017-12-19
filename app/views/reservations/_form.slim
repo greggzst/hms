@@ -7,10 +7,10 @@
     html: { id: 'add_service' }) do |f|
     = f.hidden_field :start_date
     = f.hidden_field :end_date
-    = f.hidden_field :guests
     = f.simple_fields_for :reservation_rooms do |rr|
       = rr.hidden_field :room_id
       = rr.hidden_field :amount_reserved
+      = rr.hidden_field :guests
       = rr.hidden_field :room_price, class: 'room-price'
     b.ml-2.mb-2 Services:
     = f.simple_fields_for :reservation_services do |rs|

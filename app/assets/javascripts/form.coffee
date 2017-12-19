@@ -67,11 +67,11 @@ init = ->
       reservation:{
         start_date: $startDate.val()
         end_date: $endDate.val()
-        guests: $numberOfGuests.val()
         amount_to_pay: roomPrice
         reservation_rooms_attributes:[
           room_id: roomId
           amount_reserved: 1
+          guests: $numberOfGuests.val()
           room_price: roomPrice
         ]
       }

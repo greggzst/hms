@@ -17,7 +17,7 @@
         li = "#{room[0]} x #{room[1]} - #{number_to_currency(room[2])}"
   .guests-number.ml-2
     b.mr-3 Number of guests:
-    = @reservation.guests
+    = @reservation.reservation_rooms.map{|rr| rr.guests}.sum
   - if summary
     - booked_services = @reservation.reservation_services.reject{|rs| rs.amount == 0}
     - if booked_services.any?
