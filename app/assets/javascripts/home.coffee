@@ -11,6 +11,7 @@ init = ->
     $.ajax
       url: url
       success: (data, status, jqXHR) ->
+        $attachTo.empty()
         $attachTo.append(data)
         $attachTo.parent().addClass('visible')
 

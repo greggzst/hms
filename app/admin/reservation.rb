@@ -1,5 +1,5 @@
 ActiveAdmin.register Reservation do
-  permit_params reservation_services_attributes: [:id, :service_id, :amount]
+  permit_params :is_cancelled, reservation_services_attributes: [:id, :service_id, :amount]
   actions :all, except: [:destroy]
 
   filter :user, as: :select, collection: proc { User.distinct.pluck :email, :id }
@@ -91,6 +91,7 @@ ActiveAdmin.register Reservation do
         rs.input :service_id, as: :hidden
         rs.input :amount, label: rs.object.service.name
       end
+      f.input :is_cancelled
     end
     f.actions
   end

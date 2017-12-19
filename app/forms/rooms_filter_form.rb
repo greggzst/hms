@@ -10,7 +10,8 @@ class RoomsFilterForm
 
   def query
     reservations_rooms = Reservation.where(
-      "is_cancelled = 'false' AND (date(start_date) < ? AND date(end_date) > ?)",
+      "is_cancelled = ? AND (date(start_date) < ? AND date(end_date) > ?)",
+      false,
       end_date,
       start_date
       ).includes(
