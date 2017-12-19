@@ -51,7 +51,7 @@ class RoomsController < ApplicationController
         :end_date,
         :guests,
         :amount_to_pay,
-        reservation_rooms_attributes: [:id, :room_id, :amount_reserved],
+        reservation_rooms_attributes: [:id, :room_id, :amount_reserved, :room_price],
         reservation_services_attributes: [:id, :service_id, :amount]
       )
     end

@@ -31,3 +31,9 @@ body{
     color: #ff0000;
     margin-top: 4px;
 }
+
+.form-control:disabled, .form-control[readonly]{
+    color: black;
+    background: white;
+    cursor: default;
+}

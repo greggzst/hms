@@ -33,6 +33,31 @@ init = ->
         $rooms.append(data)
     false
 
+  $('body').on 'click', '#add_service .service-amount .amount-control', ->
+    $button = $(@)
+    $amountInput = $button.siblings '.amount-input'
+    $amountToPayInput = $('#reservation_amount_to_pay')
+    $roomPriceInputs = $button.parent().parent().siblings('.room-price')
+
+    roomPrice = parseFloat($roomPriceInputs.val())
+    servicePrice = parseFloat($button.siblings('.service-price').val())
+    currentAmmount = parseFloat($amountInput.val())
+
+    if $button.hasClass 'control-increase'
+      newAmount = currentAmmount + 1
+      $buttonDecrease = $button.siblings('.control-decrease')
+      $buttonDecrease.prop('disabled', false) if $buttonDecrease.prop('disabled')
+    else
+      newAmount = currentAmmount - 1
+      # decrese button
+      $button.prop('disabled', true) if newAmount == 0
+
+    $amountInput.val(newAmount)
+
+    newAmountToPay = roomPrice + newAmount * servicePrice
+    $amountToPayInput.val(newAmountToPay)
+
+
   $('body').on 'click', '.action .book-button', ->
     $button = $(@)
     roomId = $button.data 'room-id'
@@ -47,6 +72,7 @@ init = ->
         reservation_rooms_attributes:[
           room_id: roomId
           amount_reserved: 1
+          room_price: roomPrice
         ]
       }
 
@@ -65,6 +91,8 @@ init = ->
   $('body').on 'submit', '#add_service', ->
     $form = $(@)
     formData = $form.serializeArray()
+
+    console.log formData
 
     $.ajax
       url: $form.attr('action')

@@ -1,0 +1,31 @@
+- summary ||= false
+
+.reservations-details
+  b.ml-2 Your reservations details:
+  .date-range.ml-2.mb-4
+    span.date-from
+      b.mr-3 Date from:
+      = @reservation.start_date.strftime('%D')
+    span.date-to.ml-5
+      b.mr-3 Date to:
+      = @reservation.end_date.strftime('%D')
+
+  .rooms.ml-2.mb-4
+    b Rooms you're booking:
+    ul.rooms-list
+      - @reservation.reservation_rooms.map{|rr| [rr.room.name, rr.amount_reserved, rr.room_price ]}.each do |room|
+        li = "#{room[0]} x #{room[1]} - #{number_to_currency(room[2])}"
+  .guests-number.ml-2
+    b.mr-3 Number of guests:
+    = @reservation.guests
+  - if summary
+    - booked_services = @reservation.reservation_services.reject{|rs| rs.amount == 0}
+    - if booked_services.any?
+      .services.ml-2.mb-4
+        b Services you're booking:
+        ul.services-list
+          - booked_services.map{|rs| [rs.service.name, rs.amount, rs.service.price]}.each do |s|
+            li = "#{s[0]} x #{s[1]} - #{number_to_currency(s[2])}"
+    .amount_to_pay.ml-2.mb-4
+      b.mr-3 Amount to pay:
+      = number_to_currency(@reservation.amount_to_pay)
