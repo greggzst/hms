@@ -19,7 +19,7 @@
     b.mr-3 Number of guests:
     = @reservation.reservation_rooms.map{|rr| rr.guests}.sum
   - if summary
-    - booked_services = @reservation.reservation_services.reject{|rs| rs.amount == 0}
+    - booked_services = @reservation.reservation_services.reject{|rs| rs.amount.zero?}
     - if booked_services.any?
       .services.ml-2.mb-4
         b Services you're booking:
