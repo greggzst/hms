@@ -6,6 +6,7 @@ ActiveAdmin.register Service do
   filter :availability, as: :select, collection: proc { Service.availabilities.map{|k,v| [k, v]} }
 
   index do
+    id_column
     column :name
     column :price do |s|
       number_to_currency(s.price)

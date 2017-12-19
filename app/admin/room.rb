@@ -8,6 +8,7 @@ ActiveAdmin.register Room do
   filter :room_amount
 
   index do
+    id_column
     column :name
     column :description do |r|
       truncate(r.description, length: 120)
