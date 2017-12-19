@@ -92,8 +92,6 @@ init = ->
     $form = $(@)
     formData = $form.serializeArray()
 
-    console.log formData
-
     $.ajax
       url: $form.attr('action')
       method: $form.attr('method')
@@ -127,7 +125,8 @@ init = ->
       method: $form.attr('method')
       data: formData
       success: (data, status, jqXHR) ->
-        console.log 'supper'
+        $('#attach-filter').parent().removeClass('visible')
+        $('#reservation-confirm').modal()
       error:(jqXHR, status, error) ->
         $form.replaceWith(jqXHR.responseText)
     #prevents form from submission

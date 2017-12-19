@@ -27,3 +27,5 @@
       = user.input :password_confirmation, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
 
     = f.submit 'Book', class: 'btn btn-primary'
+
+    = render 'reservations/confirmation_modal'
