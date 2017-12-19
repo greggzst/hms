@@ -9,4 +9,16 @@ class Reservation < ApplicationRecord
   accepts_nested_attributes_for :reservation_rooms, :reservation_services, :user
 
   attr_accessor :amount_to_pay
+
+  def costs
+    days = length_in_days
+    rooms_costs = reservation_rooms.map{|rr| rr.room.price * rr.guests * rr.amount_reserved * days}.sum
+    services_costs = reservation_services.map{|rs| rs.service.price * rs.amount }.sum
+
+    rooms_costs + services_costs
+  end
+
+  def length_in_days
+    (end_date.to_date - start_date.to_date).to_i
+  end
 end
