@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  days:
+    one: "%{count} day"
+    few: "%{count} days"
+    many: "%{count} days"
+    other: "%{count} days"

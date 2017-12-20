@@ -9,6 +9,9 @@
     span.date-to.ml-5
       b.mr-3 Date to:
       = @reservation.end_date.strftime('%D')
+    span.length.ml-5
+      b.mr-3 Length:
+      = t('days', count: @reservation.length_in_days)
 
   .rooms.ml-2.mb-4
     b Rooms you're booking:
