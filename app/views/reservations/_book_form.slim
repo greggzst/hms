@@ -13,9 +13,11 @@
       = rr.hidden_field :room_id
       = rr.hidden_field :amount_reserved
       = rr.hidden_field :guests
+      = rr.hidden_field :room_price, class: 'room-price'
     = f.simple_fields_for :reservation_services do |rs|
       = rs.hidden_field :service_id
       = rs.hidden_field :amount
+    = f.hidden_field :amount_to_pay
 
     = f.simple_fields_for :user do |user|
       = user.input :email

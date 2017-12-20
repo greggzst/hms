@@ -33,6 +33,7 @@ class RoomsController < ApplicationController
       if @user.save
         @reservation.user = @user
         @reservation.save
+        head :ok
       else
         @reservation.user = @user unless @reservation.user.present?
         render partial: 'reservations/book_form', locals: { errors: @user.errors.messages.count > 1 }, status: :not_acceptable
@@ -41,6 +42,7 @@ class RoomsController < ApplicationController
       @user.update(user_params) if !@user.has_account && user_params[:has_account]
       @reservation.user = @user
       @reservation.save
+      head :ok
     end
   end
 

@@ -5,10 +5,10 @@
   .date-range.ml-2.mb-4
     span.date-from
       b.mr-3 Date from:
-      = @reservation.start_date.strftime('%D')
+      = @reservation.start_date.strftime('%d/%m/%Y')
     span.date-to.ml-5
       b.mr-3 Date to:
-      = @reservation.end_date.strftime('%D')
+      = @reservation.end_date.strftime('%d/%m/%Y')
     span.length.ml-5
       b.mr-3 Length:
       = t('days', count: @reservation.length_in_days)
