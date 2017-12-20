@@ -39,9 +39,9 @@ init = ->
     $button = $(@)
     $amountInput = $button.siblings '.amount-input'
     $amountToPayInput = $('#reservation_amount_to_pay')
-    $roomPriceInputs = $button.parent().parent().siblings('.room-price')
+    $baseAmount = $('#reservation_base_amount')
 
-    roomPrice = parseFloat($roomPriceInputs.val())
+    baseAmount = parseFloat($baseAmount.val())
     servicePrice = parseFloat($button.siblings('.service-price').val())
     currentAmmount = parseFloat($amountInput.val())
 
@@ -56,7 +56,7 @@ init = ->
 
     $amountInput.val(newAmount)
 
-    newAmountToPay = roomPrice + newAmount * servicePrice
+    newAmountToPay = baseAmount + newAmount * servicePrice
     $amountToPayInput.val(newAmountToPay)
 
 
@@ -69,7 +69,6 @@ init = ->
       reservation:{
         start_date: $startDate.val()
         end_date: $endDate.val()
-        amount_to_pay: roomPrice
         reservation_rooms_attributes:[
           room_id: roomId
           amount_reserved: 1

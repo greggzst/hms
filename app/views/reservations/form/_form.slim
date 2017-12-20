@@ -7,11 +7,12 @@
     html: { id: 'add_service' }) do |f|
     = f.hidden_field :start_date
     = f.hidden_field :end_date
+    = f.hidden_field :base_amount
     = f.simple_fields_for :reservation_rooms do |rr|
       = rr.hidden_field :room_id
       = rr.hidden_field :amount_reserved
       = rr.hidden_field :guests
-      = rr.hidden_field :room_price, class: 'room-price'
+      = rr.hidden_field :room_price
     b.ml-2.mb-2 Services:
     = f.simple_fields_for :reservation_services do |rs|
       = rs.hidden_field :service_id
@@ -31,7 +32,7 @@
           = " x #{number_to_currency(rs.object.service.price)}"
 
     = f.input :amount_to_pay, label: 'Amount to pay: ', label_html: { class: 'mr-3' },
-              wrapper_html: { class: 'mx-2' }, input_html: { type: 'text', readonly: true }
+              wrapper_html: { class: 'mx-2' }, input_html: { type: 'text', readonly: true, value: f.object.base_amount }
 
     button.back-button.btn.btn-light.ml-2 type="button" Back
 

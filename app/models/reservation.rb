@@ -8,7 +8,13 @@ class Reservation < ApplicationRecord
 
   accepts_nested_attributes_for :reservation_rooms, :reservation_services, :user
 
+  attr_writer :base_amount
   attr_accessor :amount_to_pay
+
+  def base_amount
+    days = length_in_days
+    reservation_rooms.map{|rr| rr.room.price * rr.guests * rr.amount_reserved * days}.sum
+  end
 
   def costs
     days = length_in_days
