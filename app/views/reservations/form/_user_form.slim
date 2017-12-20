@@ -1,4 +1,6 @@
+- has_account_in_system ||= false
 - errors ||= false
+- not_login ||= false
 
 = simple_form_for(@reservation,
     url: book_rooms_path,
@@ -15,15 +17,24 @@
     = rs.hidden_field :service_id
     = rs.hidden_field :amount
   = f.hidden_field :amount_to_pay
+  - if current_user
+    .reservation-text.ml-2.mb-4
+      b = "This reservation will be added to your account #{current_user.email}"
+  - else
+    = f.simple_fields_for :user do |user|
+      = user.input :email, input_html: {data: { url: pre_book_rooms_path }}
+      - if has_account_in_system
+        = user.input :password, wrapper_html: { class: "#{not_login ? 'hidden' : 'shown'}" }
+        = user.input :do_not_login, as: :boolean
+      - else
+        = user.input :has_account, label: 'Create Account', input_html: { checked: "#{'checked' if errors}" }
+        = user.input :firstname, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
+        = user.input :lastname, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
+        = user.input :valid_document_number, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
+        = user.input :password, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
+        = user.input :password_confirmation, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
 
-  = f.simple_fields_for :user do |user|
-    = user.input :email
-    = user.input :has_account, label: 'Create Account', input_html: { checked: "#{'checked' if errors}" }
-    = user.input :firstname, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
-    = user.input :lastname, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
-    = user.input :valid_document_number, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
-    = user.input :password, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
-    = user.input :password_confirmation, wrapper_html: { class: "#{errors ? 'shown' : 'hidden'}" }
+      = user.input :accept_terms, as: :boolean
 
   button.back-button.btn.btn-light.ml-2 type="button" Back
 

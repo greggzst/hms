@@ -1,3 +1,5 @@
+login = null
+
 init = ->
   $startDate = $('#start-date')
   $endDate = $('#end-date')
@@ -116,6 +118,18 @@ init = ->
       $shownFields.removeClass 'shown'
       $shownFields.addClass 'hidden'
 
+  $('body').on 'change', '#reservation-step-3 #reservation_user_attributes_do_not_login', ->
+    $form = $(@).closest 'form'
+    $password = $form.find '.shown'
+    if $(@).is(':checked')
+      $password = $form.find '.shown'
+      $password.removeClass 'shown'
+      $password.addClass 'hidden'
+    else
+      $password = $form.find '.hidden'
+      $password.removeClass 'hidden'
+      $password.addClass 'shown'
+
   $('body').on 'submit', '#new_reservation', ->
     $form = $(@)
     formData = $form.serializeArray()
@@ -126,16 +140,35 @@ init = ->
       data: formData
       success: (data, status, jqXHR) ->
         $('#attach-filter').parent().removeClass('visible')
+        login ?= true if data.login
         $('#reservation-confirm').modal()
       error:(jqXHR, status, error) ->
         $form.replaceWith(jqXHR.responseText)
     #prevents form from submission
     false
 
+  $('body').on 'hidden.bs.modal', '#reservation-confirm', ->
+    Turbolinks.visit() if login
+
   $('body').on 'click', '.back-button', ->
     $tabs = $('#form-tabs')
     $active = $tabs.find('.active').parent()
     $active.prev().find('a').trigger 'click'
+
+  $('body').on 'change', '#reservation_user_attributes_email', ->
+    $emailInput = $(@)
+    url = "#{$emailInput.data('url')}?email=#{$emailInput.val()}"
+    $form = $emailInput.closest('form')
+    $submit = $form.find("input[type='submit']")
+    $.ajax
+      url: url
+      data: $form.serializeArray()
+      method: 'POST'
+      success: (data, status, jqXHR) ->
+        if data
+          $form.replaceWith(data)
+          $('body').off('change', '#reservation_user_attributes_email')
+
 
 
 @Form = { init }
