@@ -128,7 +128,7 @@ init = ->
         $('#attach-filter').parent().removeClass('visible')
         $('#reservation-confirm').modal()
       error:(jqXHR, status, error) ->
-        $form.parent().replaceWith(jqXHR.responseText)
+        $form.replaceWith(jqXHR.responseText)
     #prevents form from submission
     false
 

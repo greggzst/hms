@@ -15,11 +15,11 @@ class RoomsController < ApplicationController
     if params[:new_reservation].present? && params[:new_reservation] == 'true'
       @reservation = Reservation.new(reservation_params)
       Service.available.each { |s| @reservation.reservation_services.build(service: s) }
-      render partial: 'reservations/form' and return
+      render partial: 'reservations/form/form' and return
     elsif params[:add_service].present? && params[:add_service] == 'true'
       @reservation = Reservation.new(reservation_params)
       @reservation.build_user
-      render partial: 'reservations/book_form' and return
+      render partial: 'reservations/form/book_form' and return
     end
   end
 
@@ -36,7 +36,7 @@ class RoomsController < ApplicationController
         head :ok
       else
         @reservation.user = @user unless @reservation.user.present?
-        render partial: 'reservations/book_form', locals: { errors: @user.errors.messages.count > 1 }, status: :not_acceptable
+        render partial: 'reservations/form/user_form', locals: { errors: @user.errors.messages.count > 1 }, status: :not_acceptable
       end
     else
       @user.update(user_params) if !@user.has_account && user_params[:has_account]
