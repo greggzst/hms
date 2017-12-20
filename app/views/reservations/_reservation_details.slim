@@ -11,7 +11,7 @@
       = @reservation.end_date.strftime('%d/%m/%Y')
     span.length.ml-5
       b.mr-3 Length:
-      = t('days', count: @reservation.length_in_days)
+      = t('nights', count: @reservation.length_in_days)
 
   .rooms.ml-2.mb-4
     b Rooms you're booking:
