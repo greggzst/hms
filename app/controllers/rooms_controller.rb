@@ -38,6 +38,7 @@ class RoomsController < ApplicationController
         render partial: 'reservations/book_form', locals: { errors: @user.errors.messages.count > 1 }, status: :not_acceptable
       end
     else
+      @user.update(user_params) if !@user.has_account && user_params[:has_account]
       @reservation.user = @user
       @reservation.save
     end
