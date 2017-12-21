@@ -17,7 +17,7 @@ class Photo < ApplicationRecord
 
   private
     def set_new_primary
-      secondary_owner_photos = self.owner.photos.where(is_primary: false)
+      secondary_owner_photos = self.room.photos.where(is_primary: false)
       if self.is_primary && secondary_owner_photos.any?
         new_primary = secondary_owner_photos.first
         new_primary.set_primary
