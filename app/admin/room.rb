@@ -8,6 +8,7 @@ ActiveAdmin.register Room do
   filter :room_amount
 
   index do
+    selectable_column
     id_column
     column :name
     column :description do |r|

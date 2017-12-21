@@ -24,6 +24,7 @@ ActiveAdmin.register Photo do
   end
 
   index do
+    selectable_column
     id_column
     column :room
     column :image do |p|
