@@ -11,6 +11,8 @@ class Reservation < ApplicationRecord
   attr_writer :base_amount
   attr_accessor :amount_to_pay
 
+  default_scope { order(created_at: :desc) }
+
   def base_amount
     count_rooms_costs
   end
@@ -24,6 +26,10 @@ class Reservation < ApplicationRecord
 
   def length_in_days
     (end_date.to_date - start_date.to_date).to_i
+  end
+
+  def in_progress?
+    Time.now.to_date.between?(start_date.to_date, end_date.to_date)
   end
 
   def cancel!

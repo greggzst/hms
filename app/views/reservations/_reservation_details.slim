@@ -1,34 +1,15 @@
 - summary ||= false
 
 .reservations-details
-  b.ml-2 Your reservations details:
-  .date-range.ml-2.mb-4
-    span.date-from
-      b.mr-3 Date from:
-      = @reservation.start_date.strftime('%d/%m/%Y')
-    span.date-to.ml-5
-      b.mr-3 Date to:
-      = @reservation.end_date.strftime('%d/%m/%Y')
-    span.length.ml-5
-      b.mr-3 Length:
-      = t('nights', count: @reservation.length_in_days)
+  b.ml-2.mb-2 Your reservations details:
+  = date_range_tag(@reservation)
 
-  .rooms.ml-2.mb-4
-    b Rooms you're booking:
-    ul.rooms-list
-      - @reservation.reservation_rooms.map{|rr| [rr.room.name, rr.amount_reserved, rr.room_price ]}.each do |room|
-        li = "#{room[0]} x #{room[1]} - #{number_to_currency(room[2])}"
-  .guests-number.ml-2
-    b.mr-3 Number of guests:
-    = @reservation.reservation_rooms.map{|rr| rr.guests}.sum
+  = rooms_list_tag(@reservation)
+
+  = guests_number_tag(@reservation)
+
   - if summary
-    - booked_services = @reservation.reservation_services.reject{|rs| rs.amount.zero?}
-    - if booked_services.any?
-      .services.ml-2.mb-4
-        b Services you're booking:
-        ul.services-list
-          - booked_services.map{|rs| [rs.service.name, rs.amount, rs.service.price]}.each do |s|
-            li = "#{s[0]} x #{s[1]} - #{number_to_currency(s[2])}"
+    = booked_services_tag(@reservation)
     .amount_to_pay.ml-2.mb-4
       b.mr-3 Amount to pay:
       = number_to_currency(@reservation.amount_to_pay)

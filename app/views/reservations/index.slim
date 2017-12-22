@@ -1,0 +1,37 @@
+.container
+  h1 My Reservations
+  - if @reservations.any?
+    table.table
+      tr
+        th RN
+        th Reservation Date
+        th Start Date
+        th End Date
+        th.text-center Is Cancelled
+        th.text-center Finished?
+        th Costs
+        th
+      - @reservations.each_with_index do |reservation, index|
+        tr
+          td= index + 1
+          td= reservation.created_at.strftime('%d/%m/%Y')
+          td= reservation.start_date.strftime('%d/%m/%Y')
+          td= reservation.start_date.strftime('%d/%m/%Y')
+          td.text-center= boolean_tag(reservation.is_cancelled)
+          td.text-center= boolean_tag(reservation.finished?)
+          td= number_to_currency(reservation.costs)
+          td.actions
+            = link_to 'show', '#', data: { url: reservation_path(reservation) }, class: 'reservation-show-link mr-2'
+            - if !reservation.is_cancelled && !reservation.finished? && !reservation.in_progress?
+              = link_to('cancel', cancel_reservation_path(reservation),
+                method: :patch, data: { confirm: 'Are you sure you want to cancel this reservation?'})
+            - elsif reservation.is_cancelled
+              span.text-danger cancelled
+
+    = render 'reservations/reservation_modal'
+
+    javascript:
+      Reservations.initIndex()
+
+  - else
+    p You haven't made any reservation.

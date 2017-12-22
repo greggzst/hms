@@ -1,0 +1,8 @@
+= date_range_tag(@reservation)
+= rooms_list_tag(@reservation, true)
+= booked_services_tag(@reservation)
+= guests_number_tag(@reservation)
+- if @reservation.is_cancelled
+  p
+    | This reservation has been
+    span.text-danger.ml-1 cancelled

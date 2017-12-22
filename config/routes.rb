@@ -10,4 +10,8 @@ Rails.application.routes.draw do
     post :pre_book, on: :collection
     post :book, on: :collection
   end
+
+  resources :reservations, only: [:index, :show] do
+    patch :cancel, on: :member
+  end
 end
