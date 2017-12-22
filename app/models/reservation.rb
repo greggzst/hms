@@ -31,6 +31,10 @@ class Reservation < ApplicationRecord
     self.save!
   end
 
+  def finished?
+    end_date.to_date <= Time.now.to_date || is_cancelled
+  end
+
   private
     def count_rooms_costs
       days = length_in_days

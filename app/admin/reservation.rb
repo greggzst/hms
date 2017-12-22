@@ -59,6 +59,8 @@ ActiveAdmin.register Reservation do
       switch_link(cancel_admin_reservation_path(r), r, :is_cancelled)
     end
 
+    column :finished?
+
     column :costs do |r|
       number_to_currency(r.costs)
     end
@@ -102,6 +104,7 @@ ActiveAdmin.register Reservation do
       end
 
       row :is_cancelled
+      row :finished?
 
       row :costs do |r|
         number_to_currency(r.costs)
