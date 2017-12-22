@@ -1,6 +1,28 @@
+include ActiveAdminHelper
+
 ActiveAdmin.register Reservation do
   permit_params :is_cancelled, reservation_services_attributes: [:id, :service_id, :amount]
   actions :all, except: [:destroy]
+
+  batch_action :cancel do |ids|
+    batch_action_collection.find(ids).each do |r|
+      r.cancel! unless r.is_cancelled
+    end
+    redirect_to collection_path, alert: 'Reservations have been cancelled.'
+  end
+
+  member_action :cancel, method: :patch do
+    unless resource.is_cancelled
+      resource.cancel!
+      if request.xhr?
+        render json: [{ label: 'YES', class: 'yes' }]
+      else
+        redirect_to collection_path, alert: 'Reservation has been cancelled.'
+      end
+    else
+      head :ok
+    end
+  end
 
   filter :user, as: :select, collection: proc { User.distinct.pluck :email, :id }
   filter :start_date
@@ -9,6 +31,7 @@ ActiveAdmin.register Reservation do
   filter :created_at
 
   index do
+    selectable_column
     id_column
     column :user
     column :start_date do |r|
@@ -32,14 +55,18 @@ ActiveAdmin.register Reservation do
       link_to services_count, admin_services_path("q[id_in]" => services_ids)
     end
 
-    column :is_cancelled
+    column :is_cancelled do |r|
+      switch_link(cancel_admin_reservation_path(r), r, :is_cancelled)
+    end
 
     column :costs do |r|
       number_to_currency(r.costs)
     end
 
     column :created_at
-    actions
+    actions defaults: true do |r|
+      link_to('Cancel', cancel_admin_reservation_path(r), method: :patch)
+    end
   end
 
   show do

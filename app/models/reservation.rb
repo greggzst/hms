@@ -12,14 +12,12 @@ class Reservation < ApplicationRecord
   attr_accessor :amount_to_pay
 
   def base_amount
-    days = length_in_days
-    reservation_rooms.map{|rr| rr.room.price * rr.guests * rr.amount_reserved * days}.sum
+    count_rooms_costs
   end
 
   def costs
-    days = length_in_days
-    rooms_costs = reservation_rooms.map{|rr| rr.room.price * rr.guests * rr.amount_reserved * days}.sum
-    services_costs = reservation_services.map{|rs| rs.service.price * rs.amount }.sum
+    rooms_costs = count_rooms_costs
+    services_costs = count_serices_costs
 
     rooms_costs + services_costs
   end
@@ -27,4 +25,19 @@ class Reservation < ApplicationRecord
   def length_in_days
     (end_date.to_date - start_date.to_date).to_i
   end
+
+  def cancel!
+    self.is_cancelled = true
+    self.save!
+  end
+
+  private
+    def count_rooms_costs
+      days = length_in_days
+      reservation_rooms.map{|rr| rr.room.price * rr.guests * rr.amount_reserved * days unless rr.room.nil?}.sum
+    end
+
+    def count_serices_costs
+      reservation_services.map{|rs| rs.service.price * rs.amount }.sum
+    end
 end
