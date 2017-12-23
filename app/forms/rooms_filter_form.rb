@@ -23,7 +23,11 @@ class RoomsFilterForm
         booked_rooms_ids = reservations_rooms.map do |key, value|
           key[0] if key[1] && value.count == key[1].room_amount
         end.uniq.join(',')
-        Room.where('id NOT IN (?) AND capacity >= ?', booked_rooms_ids, number_of_guests)
+        if booked_rooms_ids.length == 0
+          Room.where('capacity >= ?', number_of_guests)
+        else
+          Room.where('id NOT IN (?) AND capacity >= ?', booked_rooms_ids, number_of_guests)
+        end
       else
         Room.where('capacity >= ?', number_of_guests)
       end
