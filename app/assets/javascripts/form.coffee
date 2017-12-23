@@ -135,7 +135,11 @@ init = ->
 
   $('body').on 'submit', '#new_reservation', ->
     $form = $(@)
+    $spinner = $form.find '#spinner'
+    $submitButton = $form.find "input[type='submit']"
     formData = $form.serializeArray()
+    $submitButton.prop('disabled', true)
+    $spinner.removeClass 'hidden'
 
     $.ajax
       url: $form.attr('action')
@@ -145,6 +149,7 @@ init = ->
         $('#attach-filter').parent().removeClass('visible')
         login ?= true if data.login
         $('#reservation-confirm').modal()
+        $spinner.addClass 'hidden'
       error:(jqXHR, status, error) ->
         $form.replaceWith(jqXHR.responseText)
     #prevents form from submission

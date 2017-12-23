@@ -40,3 +40,8 @@
   button.back-button.btn.btn-light.ml-2 type="button" Back
 
   = f.submit 'Book', class: 'btn btn-primary ml-2'
+
+  #spinner.container.mt-4.text-center.hidden
+    | Your request is being processed...
+    .spinner
+      = fa_icon "circle-o-notch", class: 'fa-spin fa-4x'
