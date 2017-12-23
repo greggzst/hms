@@ -41,3 +41,7 @@ body{
 button, input[type='submit'], .input-group-addon.date{
     cursor: pointer;
 }
+
+.checkbox label input{
+    margin-right: 6px;
+}
