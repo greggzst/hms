@@ -10,11 +10,11 @@
           remote: true) do |f|
         .input-group.string.optional.mx-2
           = f.input_field :start_date, class: 'form-control', id: 'start-date'
-          span.input-group-addon
+          span.input-group-addon.date
             i.material-icons date_range
         .input-group.string.optional.mx-2
           = f.input_field :end_date, class: 'form-control', id: 'end-date'
-          span.input-group-addon
+          span.input-group-addon.date
             i.material-icons date_range
         = f.input :number_of_guests, input_html: { id: 'number-of-guests' }
         = f.submit 'Check availabity', class: 'btn btn-primary'

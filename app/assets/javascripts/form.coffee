@@ -18,6 +18,10 @@ init = ->
       maxDate = $(@).datepicker('getDate')
       $startDate.datepicker('option', 'maxDate', maxDate)
 
+  $('body').on 'click', '#filter-form .input-group-addon.date', ->
+    elem = $(@)
+    elem.prev().focus()
+
   $('body').on 'submit', '#filter-form', ->
     $form = $(@)
     formData = $form.serializeArray()
