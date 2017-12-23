@@ -14,6 +14,9 @@ ActiveAdmin.register User do
     column :firstname
     column :lastname
     column :valid_document_number
+    column :reservations do |u|
+      link_to u.reservations.count, admin_reservations_path("q[user_id_eq]" => u)
+    end
     actions
   end
 
