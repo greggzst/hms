@@ -36,7 +36,7 @@ init = ->
       data: formData
       success: (data, status, jqXHR) ->
         $spinner.addClass('hidden')
-        $rooms.append(data)
+        $rooms.empty().append(data)
     false
 
   $('body').on 'click', '#add_service .service-amount .amount-control', ->
