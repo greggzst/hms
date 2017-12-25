@@ -16,5 +16,6 @@
 //= require jquery-ui
 //= require popper
 //= require bootstrap-sprockets
+//= require photoswipe
 //= require turbolinks
 //= require_tree .
