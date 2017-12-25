@@ -1,0 +1,6 @@
+.gallery data-allowfullscreen="true" data-autoplay="true"
+  - room_photos.each do |photo|
+    = image_tag photo.image_url(:preview), class: "#{photo.is_primary ? 'primary' : 'hidden'}"
+
+javascript:
+  Gallery.init();

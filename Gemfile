@@ -51,8 +51,8 @@ gem 'bootstrap', '~> 4.0.0.beta2.1'
 # simple_form
 gem 'simple_form'
 
-# photoswipe
-gem 'photoswipe-rails'
+# fotorama
+gem 'fotorama-rails'
 
 # carrierwave
 gem 'carrierwave'
