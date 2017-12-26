@@ -19,7 +19,7 @@ class Reservation < ApplicationRecord
 
   def costs
     rooms_costs = count_rooms_costs
-    services_costs = count_serices_costs
+    services_costs = count_services_costs
 
     rooms_costs + services_costs
   end
@@ -47,7 +47,7 @@ class Reservation < ApplicationRecord
       reservation_rooms.map{|rr| rr.room.price * rr.guests * rr.amount_reserved * days unless rr.room.nil?}.sum
     end
 
-    def count_serices_costs
+    def count_services_costs
       reservation_services.map{|rs| rs.service.price * rs.amount }.sum
     end
 end
