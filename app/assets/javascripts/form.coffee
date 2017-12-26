@@ -113,11 +113,11 @@ init = ->
   $('body').on 'change', '#reservation-step-3 #reservation_user_attributes_has_account', ->
     $form = $(@).closest 'form'
     if $(@).is(':checked')
-      $hiddenFields = $form.find '.hidden'
+      $hiddenFields = $form.find '.form-group.hidden'
       $hiddenFields.removeClass 'hidden'
       $hiddenFields.addClass 'shown'
     else
-      $shownFields = $form.find '.shown'
+      $shownFields = $form.find '.form-group.shown'
       $shownFields.removeClass 'shown'
       $shownFields.addClass 'hidden'
 
