@@ -1,6 +1,6 @@
 .row.room
   .col-md-6
-    = render 'rooms/gallery', room_photos: room.photos
+    = render 'rooms/gallery', room_photos: room.photos.order(is_primary: :desc)
   .col-md-6
     .room-details
       .name = room.name
