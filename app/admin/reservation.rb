@@ -2,7 +2,7 @@ include ActiveAdminHelper
 
 ActiveAdmin.register Reservation do
   permit_params :is_cancelled, reservation_services_attributes: [:id, :service_id, :amount]
-  actions :all, except: [:new, :destroy]
+  actions :all, except: [:new, :create, :destroy]
 
   batch_action :cancel do |ids|
     batch_action_collection.find(ids).each do |r|

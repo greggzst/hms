@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  actions :all, except: [:edit, :update, :destroy]
+  actions :all, except: [:new, :create, :edit, :update, :destroy]
 
   filter :email
   filter :has_account
