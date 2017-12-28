@@ -16,7 +16,7 @@
           td= index + 1
           td= reservation.created_at.strftime('%d/%m/%Y')
           td= reservation.start_date.strftime('%d/%m/%Y')
-          td= reservation.start_date.strftime('%d/%m/%Y')
+          td= reservation.end_date.strftime('%d/%m/%Y')
           td.text-center= boolean_tag(reservation.is_cancelled)
           td.text-center= boolean_tag(reservation.finished?)
           td= number_to_currency(reservation.costs)
