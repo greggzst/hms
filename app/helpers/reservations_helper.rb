@@ -21,11 +21,18 @@ module ReservationsHelper
     end
   end
 
-  def rooms_list_tag(reservation, no_amount_and_price = false)
-    rooms_list_items = reservation.reservation_rooms.map{|rr| [rr.room.name, rr.amount_reserved, rr.room_price ]}.map do |room|
-      room_amount_and_price = "x #{room[1]} - #{number_to_currency(room[2])}"
-      content_tag(:li, "#{room[0]} #{room_amount_and_price unless no_amount_and_price}")
-    end.join.html_safe
+  def rooms_list_tag(reservation, popup = false)
+    unless popup
+      rooms_list_items = reservation.reservation_rooms.map{|rr| [rr.room.name, rr.amount_reserved, rr.room_price ]}.map do |room|
+        room_amount_and_price = "x #{room[1]} - #{number_to_currency(room[2])}"
+        content_tag(:li, "#{room[0]} #{room_amount_and_price}")
+      end.join.html_safe
+    else
+      rooms_list_items = reservation.reservation_rooms.map{|rr| [rr.room.name, rr.amount_reserved, rr.room.price ]}.map do |room|
+        room_amount_and_price = "x #{room[1]} - #{number_to_currency(room[2])}"
+        content_tag(:li, "#{room[0]} #{room_amount_and_price}")
+      end.join.html_safe
+    end
 
     rooms_list = content_tag(:ul, class: 'rooms-list') do
       concat(rooms_list_items)
