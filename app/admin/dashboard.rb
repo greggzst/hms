@@ -6,7 +6,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel '5 recent reservations' do
-          table_for Reservation.order(created_at: :desc).limit(5) do |r|
+          table_for Reservation.where(is_cancelled: false).order(created_at: :desc).limit(5) do |r|
             r.column('ID') { |r| link_to r.id, admin_reservation_path(r)}
             r.column('Reservation Date') { |r| r.created_at.strftime('%d/%m/%Y')}
             r.column('Start Date') { |r| r.start_date.strftime('%d/%m/%Y')}
