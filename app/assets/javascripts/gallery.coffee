@@ -1,5 +1,5 @@
 init = ->
-  $('.gallery').fotorama()
+  $('.gallery.insert').fotorama()
 
 
 @Gallery = { init }

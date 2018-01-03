@@ -1,6 +1,9 @@
-.gallery data-allowfullscreen="true" data-autoplay="true"
-  - room_photos.each do |photo|
-    = image_tag photo.image_url(:preview), class: "#{photo.is_primary ? 'primary' : 'hidden'}"
+.gallery class="#{'insert' if room_photos.any? }" data-allowfullscreen="true" data-autoplay="true"
+  - if room_photos.any?
+    - room_photos.each do |photo|
+      = image_tag photo.image_url(:preview), class: "#{photo.is_primary ? 'primary' : 'hidden'}"
+  - else
+    = image_tag asset_path('fallback/picture.svg')
 
 javascript:
   Gallery.init();
