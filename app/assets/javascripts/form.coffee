@@ -46,24 +46,25 @@ init = ->
     $button = $(@)
     $amountInput = $button.siblings '.amount-input'
     $amountToPayInput = $('#reservation_amount_to_pay')
-    $baseAmount = $('#reservation_base_amount')
 
-    baseAmount = parseFloat($baseAmount.val())
+    baseAmount = parseFloat($amountToPayInput.val())
     servicePrice = parseFloat($button.siblings('.service-price').val())
-    currentAmmount = parseFloat($amountInput.val())
+    currentAmount = parseFloat($amountInput.val())
 
     if $button.hasClass 'control-increase'
-      newAmount = currentAmmount + 1
+      newAmount = currentAmount + 1
       $buttonDecrease = $button.siblings('.control-decrease')
       $buttonDecrease.prop('disabled', false) if $buttonDecrease.prop('disabled')
+      newAmountToPay = baseAmount + servicePrice
     else
-      newAmount = currentAmmount - 1
+      newAmount = currentAmount - 1
       # decrese button
       $button.prop('disabled', true) if newAmount == 0
+      newAmountToPay = baseAmount - servicePrice
 
     $amountInput.val(newAmount)
 
-    newAmountToPay = baseAmount + newAmount * servicePrice
+
     $amountToPayInput.val(newAmountToPay)
 
   $('body').off 'click', '.action .book-button'
