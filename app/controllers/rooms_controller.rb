@@ -87,8 +87,11 @@ class RoomsController < ApplicationController
         # he doesn't have an account
         @user.update(user_params) if !@user.has_account && user_params[:has_account]
         @reservation.user = @user
-        @reservation.save
-        head :ok
+        if @reservation.save
+          head :ok
+        else
+          render partial: 'reservations/form/user_form', locals: { errors: true }, status: :not_acceptable
+        end
       end
     end
   end
