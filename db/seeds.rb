@@ -9,7 +9,7 @@ AdminUser.create!(username: 'admin', password: 'password', password_confirmation
 
 10.times do
   room_capacity = [1, 2, 3].sample
-  room_name = "Pokój #{room_capacity} osobowy"
+  room_name = "#{room_capacity} person room"
   room_price = [120, 230.50, 180].sample
   room_description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec sem suscipit, luctus quam quis, gravida enim. Fusce arcu lorem, interdum et lacus vel, finibus eleifend sapien. Etiam sodales urna dolor, ut pulvinar tortor elementum nec. Cras tempor quam ut porta aliquet. Vestibulum gravida leo et nisi tempor, eget luctus justo efficitur."
   room_amount = [1, 2].sample
