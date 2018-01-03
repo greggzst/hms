@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 AdminUser.create!(username: 'admin', password: 'password', password_confirmation: 'password')
 
-10.times do
+3.times do
   room_capacity = [1, 2, 3].sample
   room_name = "#{room_capacity} person room"
   room_price = [120, 230.50, 180].sample
