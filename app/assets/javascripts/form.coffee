@@ -18,10 +18,12 @@ init = ->
       maxDate = $(@).datepicker('getDate')
       $startDate.datepicker('option', 'maxDate', maxDate)
 
+  $('body').off 'click', '#filter-form .input-group-addon.date'
   $('body').on 'click', '#filter-form .input-group-addon.date', ->
     elem = $(@)
     elem.prev().focus()
 
+  $('body').off 'submit', '#filter-form'
   $('body').on 'submit', '#filter-form', ->
     $form = $(@)
     formData = $form.serializeArray()
@@ -39,6 +41,7 @@ init = ->
         $rooms.empty().append(data)
     false
 
+  $('body').off 'click', '#add_service .service-amount .amount-control'
   $('body').on 'click', '#add_service .service-amount .amount-control', ->
     $button = $(@)
     $amountInput = $button.siblings '.amount-input'
@@ -63,7 +66,7 @@ init = ->
     newAmountToPay = baseAmount + newAmount * servicePrice
     $amountToPayInput.val(newAmountToPay)
 
-
+  $('body').off 'click', '.action .book-button'
   $('body').on 'click', '.action .book-button', ->
     $button = $(@)
     roomId = $button.data 'room-id'
@@ -93,6 +96,7 @@ init = ->
 
     return
 
+  $('body').off 'submit', '#add_service'
   $('body').on 'submit', '#add_service', ->
     $form = $(@)
     formData = $form.serializeArray()
@@ -110,6 +114,7 @@ init = ->
     #prevents form from submission
     false
 
+  $('body').off 'change', '#reservation-step-3 #reservation_user_attributes_has_account'
   $('body').on 'change', '#reservation-step-3 #reservation_user_attributes_has_account', ->
     $form = $(@).closest 'form'
     if $(@).is(':checked')
@@ -121,6 +126,7 @@ init = ->
       $shownFields.removeClass 'shown'
       $shownFields.addClass 'hidden'
 
+  $('body').off 'change', '#reservation-step-3 #reservation_user_attributes_do_not_login'
   $('body').on 'change', '#reservation-step-3 #reservation_user_attributes_do_not_login', ->
     $form = $(@).closest 'form'
     $password = $form.find '.shown'
@@ -133,6 +139,7 @@ init = ->
       $password.removeClass 'hidden'
       $password.addClass 'shown'
 
+  $('body').off 'submit', '#new_reservation'
   $('body').on 'submit', '#new_reservation', ->
     $form = $(@)
     $spinner = $form.find '#spinner'
@@ -155,14 +162,17 @@ init = ->
     #prevents form from submission
     false
 
+  $('body').off 'hidden.bs.modal', '#reservation-confirm'
   $('body').on 'hidden.bs.modal', '#reservation-confirm', ->
     Turbolinks.visit() if login
 
+  $('body').off 'click', '.back-button'
   $('body').on 'click', '.back-button', ->
     $tabs = $('#form-tabs')
     $active = $tabs.find('.active').parent()
     $active.prev().find('a').trigger 'click'
 
+  $('body').off 'change', '#reservation_user_attributes_email'
   $('body').on 'change', '#reservation_user_attributes_email', ->
     $emailInput = $(@)
     url = "#{$emailInput.data('url')}?email=#{$emailInput.val()}"
