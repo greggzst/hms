@@ -17,7 +17,7 @@ class RoomsFilterForm
         start_date
         ).includes(
           :reservation_rooms,
-          :rooms).map(&:reservation_rooms).flatten.group_by{|rr| [rr.room_id, rr.room]}
+          :rooms).flat_map(&:reservation_rooms).group_by{|rr| [rr.room_id, rr.room]}
 
       if reservations_rooms.any?
         booked_rooms_ids = reservations_rooms.map do |key, value|

@@ -67,7 +67,7 @@ ActiveAdmin.register Reservation do
 
     column :created_at
     actions defaults: true do |r|
-      link_to('Cancel', cancel_admin_reservation_path(r), method: :patch)
+      link_to('Cancel', cancel_admin_reservation_path(r), method: :patch) if !r.is_cancelled && !r.in_progress? && !r.finished?
     end
   end
 
